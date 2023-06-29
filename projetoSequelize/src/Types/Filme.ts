@@ -1,5 +1,5 @@
 export interface Filme {
-  nome: string
+  title: string
   diretor: string
   nota: number
 }

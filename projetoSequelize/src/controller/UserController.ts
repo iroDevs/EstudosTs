@@ -1,6 +1,9 @@
 import { type Request, type Response } from 'express'
+import type IUserController from '../interfaces/IUserController'
+import { type User } from '../Types/User'
+import UserService from '../service/UserService'
 
-class UserController {
+class UserController implements IUserController {
   public async findAll (req: Request, res: Response): Promise<Response> {
     return res.status(200).json({ message: 'User ta aqui' })
   }
@@ -10,7 +13,10 @@ class UserController {
   }
 
   public async create (req: Request, res: Response): Promise<Response> {
-    return res.status(200).json({ message: 'User ta aqui' })
+    const user: User = req.body
+    const userService = new UserService(user)
+
+    return res.status(200).json(await userService.createUser())
   }
 
   public async update (req: Request, res: Response): Promise<Response> {
