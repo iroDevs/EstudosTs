@@ -2,6 +2,7 @@
 import { type Filme } from '../Types/Filme'
 import { type ResponseDto } from '../Types/ResponseDto'
 import { type User } from '../Types/User'
+import Usuario from '../database/models/Usuario'
 
 class UserService {
   private readonly user: User
@@ -12,13 +13,28 @@ class UserService {
     this.filmesFavoritos = user.filmesFavoritos
   }
 
-  public async createUser (): Promise<ResponseDto<User>> {
+  public async SaveUser (): Promise<ResponseDto<User>> {
     const isValid = this.validateUser()
     if (isValid) {
-      return {
-        status: 200,
-        message: 'usuairo criado',
-        data: this.user
+      try {
+        const saveNewUser = {
+          nome: this.user.nome,
+          idade: this.user.idade
+        }
+        console.log(saveNewUser)
+
+        await Usuario.create(saveNewUser)
+        return {
+          status: 200,
+          message: 'usuairo criado',
+          data: this.user
+        }
+      } catch (error) {
+        return {
+          status: 501,
+          message: error,
+          data: this.user
+        }
       }
     } else {
       return {

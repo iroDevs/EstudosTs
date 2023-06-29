@@ -15,8 +15,9 @@ class UserController implements IUserController {
   public async create (req: Request, res: Response): Promise<Response> {
     const user: User = req.body
     const userService = new UserService(user)
+    const response = await userService.SaveUser()
 
-    return res.status(200).json(await userService.createUser())
+    return res.status(response.status).json(response)
   }
 
   public async update (req: Request, res: Response): Promise<Response> {

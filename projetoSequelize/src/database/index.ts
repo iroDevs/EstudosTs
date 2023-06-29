@@ -1,5 +1,7 @@
 import { Sequelize } from 'sequelize-typescript'
-import dbConfig from '../config/database'
+import dbConfig from '../config/database.js'
+import Usuario from './models/Usuario'
+import Filme from './models/Filme'
 
 class Connection {
   private readonly connection: Sequelize
@@ -9,7 +11,8 @@ class Connection {
   }
 
   public index (): void {
-    // inicia os modelos;
+    Usuario.initTable(this.connection)
+    Filme.initTable(this.connection)
   }
 
   public getConection (): Sequelize {
