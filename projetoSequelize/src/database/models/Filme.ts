@@ -7,19 +7,20 @@ class Filme extends Model {
   public nota!: number
 
   static associate (models): void {
-    this.belongsToMany(models.Usuario, { foreignKey: 'filme_id', through: 'usuarios_filmes', as: 'filmes' })
+    this.belongsToMany(models.Usuario, { foreignKey: 'id_filme', through: 'usuarios_filmes', as: 'usuarios' })
   }
 
   static initTable (connection: Sequelize): void {
     this.init(
       {
-        nome: DataTypes.STRING,
-        idade: DataTypes.INTEGER
+        titulo: DataTypes.STRING,
+        diretor: DataTypes.STRING,
+        nota: DataTypes.INTEGER
       },
       {
         sequelize: connection,
-        modelName: 'Usuario',
-        tableName: 'usuarios'
+        modelName: 'Filme',
+        tableName: 'filmes'
       }
     )
   }

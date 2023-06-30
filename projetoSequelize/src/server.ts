@@ -1,6 +1,8 @@
 import express from 'express'
 import cors from 'cors'
 import userRoute from './routes/UserRoute'
+import filmeRoute from './routes/FilmeRoute'
+import userFilmeRoute from './routes/UserFilmeRoute'
 import database from './database'
 
 class App {
@@ -30,6 +32,8 @@ class App {
 
   private route (): void {
     this.express.use('/api/user', userRoute)
+    this.express.use('/api/filme', filmeRoute)
+    this.express.use('/api/userFilme', userFilmeRoute)
   }
 }
 

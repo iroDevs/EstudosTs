@@ -1,16 +1,11 @@
 "use strict";
-const express = require("express");
-const userRoute = express.Router();
-userRoute.get('/', (req, res) => {
-    const userTest = ['pedro', 'Manu'];
-    res.status(200).json(userTest);
-});
-userRoute.get('/:id', (req, res) => {
-});
-userRoute.post('/', (req, res) => {
-});
-userRoute.put('/{id}', (req, res) => {
-});
-userRoute.delete('/{id}', (req, res) => {
-});
+/* eslint-disable @typescript-eslint/no-misused-promises */
+const express_1 = require("express");
+const UserController_1 = require("../controller/UserController");
+const userRoute = express_1.default.Router();
+userRoute.get('/', UserController_1.default.findAll);
+userRoute.get('/:id', UserController_1.default.findOne);
+userRoute.post('/', UserController_1.default.create);
+userRoute.put('/:id', UserController_1.default.update);
+userRoute.delete('/:id', UserController_1.default.delete);
 module.exports = userRoute;

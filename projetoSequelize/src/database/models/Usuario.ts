@@ -2,7 +2,7 @@ import { Model, DataTypes, type Sequelize } from 'sequelize'
 
 class Usuario extends Model {
   static associate (models): void {
-    this.belongsToMany(models.Filme, { foreignKey: 'usuario_id', through: 'usuarios_filmes', as: 'usuario_like' })
+    this.belongsToMany(models.Filme, { foreignKey: 'id_usuario', through: 'usuarios_filmes', as: 'filmes' })
   }
 
   static initTable (connection: Sequelize): void {

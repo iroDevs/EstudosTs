@@ -1,18 +1,18 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
 
 import express from 'express'
+import UserFilmeController from '../controller/UserFilmeController'
 
+console.log('dentro da route esta chegando')
 
 const userFilmeRoute = express.Router()
 
-userFilmeRoute.get('/', UserController.findAll)
+userFilmeRoute.get('/', UserFilmeController.findAll)
 
-userFilmeRoute.get('/:id', UserController.findOne)
+userFilmeRoute.get('/:userId', UserFilmeController.findOne)
 
-userFilmeRoute.post('/', UserController.create)
+userFilmeRoute.post('/', UserFilmeController.create)
 
-userFilmeRoute.put('/:id', UserController.update)
-
-userFilmeRoute.delete('/:id', UserController.delete)
+userFilmeRoute.delete('/:id', UserFilmeController.delete)
 
 export = userFilmeRoute
