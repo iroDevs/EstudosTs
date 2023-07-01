@@ -8,14 +8,18 @@ class UserFilmeController implements IUserController {
   }
 
   public async findOne (req: Request, res: Response): Promise<Response> {
-    return res.status(300).json({})
+    const { userId } = req.params
+
+    const response = await UserFilmeService.getFavoritesMoviesByIdUser(Number(userId))
+
+    return res.status(response.status).json(response)
   }
 
   public async create (req: Request, res: Response): Promise<Response> {
     const { usuario_id: userID, filme_id: filmeID } = req.body
     const userService = new UserFilmeService(userID, filmeID)
-    console.log('ta chegando no controller')
     const response = await userService.addMovieToUser()
+
     return res.status(response.status).json(response)
   }
 

@@ -16,7 +16,7 @@ class App {
   private index (): void {
     this.express.use(express.json())
     this.express.use(cors())
-    this.express.listen(3333, () => {
+    this.express.listen(3443, () => {
       console.log('rodando')
     })
     this.route()
