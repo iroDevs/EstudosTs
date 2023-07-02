@@ -1,6 +1,6 @@
 
 export interface User {
-  nome: string
-  idade: number
+  nome?: string
+  idade?: number
 
 }

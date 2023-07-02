@@ -13,6 +13,6 @@ userFilmeRoute.get('/:userId', UserFilmeController.findOne)
 
 userFilmeRoute.post('/', UserFilmeController.create)
 
-userFilmeRoute.delete('/:id', UserFilmeController.delete)
+userFilmeRoute.delete('/:userId/:filmeId', UserFilmeController.delete)
 
 export = userFilmeRoute

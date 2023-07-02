@@ -8,7 +8,10 @@
       "resolveJsonModule": true,
       "skipLibCheck": true,
       "strictNullChecks": true,
-      "allowSyntheticDefaultImports": true
+      "allowSyntheticDefaultImports": true,
+      "lib": [
+        "es5", "es6", "dom", "dom.iterable"
+    ]
     },
     "include": ["src/**/*.ts", "src/config/database.js"],
     "exclude": ["node_modules", "dist",".sequelizerc"]

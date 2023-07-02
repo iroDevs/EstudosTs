@@ -4,7 +4,9 @@ import UserFilmeService from '../service/UsuarioFilmeService'
 
 class UserFilmeController implements IUserController {
   public async findAll (req: Request, res: Response): Promise<Response> {
-    return res.status(300).json({})
+    const response = await UserFilmeService.getAllUsersWithFavorites()
+
+    return res.status(response.status).json(response)
   }
 
   public async findOne (req: Request, res: Response): Promise<Response> {
@@ -24,11 +26,15 @@ class UserFilmeController implements IUserController {
   }
 
   public async update (req: Request, res: Response): Promise<Response> {
-    return res.status(300).json({})
+    return res.status(10).json({ message: 'em desenvolvimento' })
   }
 
   public async delete (req: Request, res: Response): Promise<Response> {
-    return res.status(300).json({})
+    const { userId, filmeId } = req.params
+
+    const response = await UserFilmeService.RemoveFavoriteMovieByUser(Number(userId), Number(filmeId))
+
+    return res.status(response.status).json(response)
   }
 }
 
