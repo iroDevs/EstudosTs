@@ -4,6 +4,7 @@ import userRoute from './routes/UserRoute'
 import filmeRoute from './routes/FilmeRoute'
 import userFilmeRoute from './routes/UserFilmeRoute'
 import database from './database'
+import reportRoute from './routes/ReportRoute'
 
 class App {
   public express: express.Application
@@ -16,7 +17,7 @@ class App {
   private index (): void {
     this.express.use(express.json())
     this.express.use(cors())
-    this.express.listen(3443, () => {
+    this.express.listen(3333, () => {
       console.log('rodando')
     })
     this.route()
@@ -34,6 +35,7 @@ class App {
     this.express.use('/api/user', userRoute)
     this.express.use('/api/filme', filmeRoute)
     this.express.use('/api/userFilme', userFilmeRoute)
+    this.express.use('/api/report', reportRoute)
   }
 }
 

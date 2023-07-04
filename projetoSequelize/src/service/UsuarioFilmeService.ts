@@ -33,18 +33,38 @@ class UserFilmeService {
     }
   }
 
-  static async getAllUsersWithFavorites (): Promise<ResponseDto<UserMoviesFavorite[]>> {
+  static async getUsersByFilter (query): Promise<ResponseDto<User> | ResponseDto<Usuario[]>> {
+    let user: Usuario[]
+    try {
+      user = await Usuario.findAll(query)
+      return {
+        status: 200,
+        message: 'Usuarios encontrados',
+        data: user
+      }
+    } catch (error) {
+      return {
+        status: 500,
+        message: error
+      }
+    }
+  }
+
+  static async getAllUsersWithFavorites (filter = false, query: any): Promise<ResponseDto<UserMoviesFavorite[]>> {
     const sequelize = Connection.getConection()
     const transaction = await sequelize.transaction()
-
+    let usuarios: any | undefined
     try {
-      const usuarios: any | undefined = (await UserService.getAllUsers(0, 0)).data
+      if (!filter) {
+        usuarios = (await UserService.getAllUsers(0, 0)).data
+      } else {
+        usuarios = (await UserService.getUsersByFilter(query)).data
+      }
       const retorno: any = {
         status: 200,
         message: 'filmes favoritos e usuários encontrados',
-        usuarios: []
+        data: []
       }
-      console.log(usuarios[0])
 
       if (usuarios == null) {
         return {
@@ -67,7 +87,7 @@ class UserFilmeService {
           }))
         }
 
-        retorno.usuarios.push(usuarioComFilmesFavoritos)
+        retorno.data.push(usuarioComFilmesFavoritos)
       }
 
       await transaction.commit()

@@ -10,6 +10,23 @@ class UserService {
     this.user = user
   }
 
+  static async getUsersByFilter (query): Promise<ResponseDto<User> | ResponseDto<Usuario[]>> {
+    let user: Usuario[]
+    try {
+      user = await Usuario.findAll(query)
+      return {
+        status: 200,
+        message: 'Usuarios encontrados',
+        data: user
+      }
+    } catch (error) {
+      return {
+        status: 500,
+        message: error
+      }
+    }
+  }
+
   static async getAllUsers (page: number, limit: number): Promise<ResponseDto<User> | ResponseDto<Usuario[]>> {
     let user: Usuario[]
     try {
@@ -137,11 +154,11 @@ class UserService {
   }
 
   private validateUser (): boolean {
-    if (this.user.nome.length > 300) {
+    if ((this.user.nome != null) && this.user.nome.length > 300) {
       return false
     }
 
-    if (this.user.idade > 180) {
+    if ((this.user.idade != null) && this.user.idade > 180) {
       return false
     }
     return true
