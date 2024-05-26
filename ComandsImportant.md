@@ -7,7 +7,7 @@ isso vai instlar o typescript como dependencia de desenvolvimento
 ## RODAR o Tsc para gerar o arquivo de configuração do ts
 
 ```bash
-npx init tsc --init
+npx  tsc --init
 ```
 
 ### OPCIONAL TSX para melhorar o desenvolvimento
